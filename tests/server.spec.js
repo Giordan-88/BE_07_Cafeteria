@@ -13,7 +13,7 @@ describe("Operaciones CRUD de cafes", () => {
   // 2. DELETE /cafes/:id
   it("DELETE /cafes/:id con un id inexistente debe retornar 404", async () => {
     const idInexistente = 9999;
-    const response = await request(app)
+    const response = await request(server)
       .delete(`/cafes/${idInexistente}`)
       .set("Authorization", "Bearer fakeToken")
       .send();
