@@ -2,8 +2,7 @@ const request = require("supertest");
 const server = require("../index");
 
 describe("Operaciones CRUD de cafes", () => {
-
-    // 1. GET /cafes
+  // 1. GET /cafes
   it("GET /cafes debe retornar status 200 y un arreglo con al menos un objeto", async () => {
     const response = await request(server).get("/cafes").send();
     expect(response.status).toBe(200);
@@ -13,8 +12,12 @@ describe("Operaciones CRUD de cafes", () => {
 
   // 2. DELETE /cafes/:id
   it("DELETE /cafes/:id con un id inexistente debe retornar 404", async () => {
-    const idInexistente = 999;
-    const response = await request(server).delete(`/cafes/${idInexistente}`).send();
+    const idInexistente = 9999;
+    const response = await request(app)
+      .delete(`/cafes/${idInexistente}`)
+      .set("Authorization", "Bearer fakeToken")
+      .send();
+
     expect(response.status).toBe(404);
   });
 
@@ -32,5 +35,4 @@ describe("Operaciones CRUD de cafes", () => {
     const response = await request(server).put("/cafes/1").send(cafe);
     expect(response.status).toBe(400);
   });
-
 });
